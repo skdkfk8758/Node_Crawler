@@ -1,73 +1,47 @@
 import request from 'request'
 import cheerio from 'cheerio'
-import model from '../model/melon_songinfo_bj';
-import { CLIENT_RENEG_LIMIT } from 'tls';
 import DAO from '../DAO';
 
+export const req_melon = async () => {    
+    await request.get('https://www.melon.com/chart/', async (error, response, body) => {
 
-export const req_google = () => {
-    request.get('http://www.google.com', (error, response, body) => {
         const $ = cheerio.load(body)
-        console.log($('title').text())
-    })
-}
 
-var title = new Array(),
-    artist = new Array(),
-    up_date,
-    up_time;
-var music_Array=[]
+        var music_list = []
 
-export const req_melon = () => {
-    request.get('https://www.melon.com/chart/', (error, response, body) => {
-        const $ = cheerio.load(body)
-        // console.log(model.songinfomodel) 
+        let list = await $('.lst50').map(async function() { 
 
-         //   $('.ellipsis>span>a').map(function() {
-        $('.lst50').map(function() {
-           var $ = cheerio.load(this)
+            const $ = cheerio.load(this)
 
-           var music_item={}           
-           $('.rank').map(function(){
-               music_item['Ranking'] = $(this).text()
-           })
-           $('.rank01>span>a').map(function(){
-            music_item['Title'] = $(this).text()
-           })
-           $('.rank02>span>a').map(function(){
-            
-            music_item['Artist'] = $(this).text()
-           })
-           $('.rank03>a').map(function(){
-               
-            music_item['Album'] = $(this).text()
-           })
-        //    console.log(music_item)
-            // console.log('========================')
-           music_Array.push(music_item)
-        }).get().join(' ');
+            // 순위
+            let rank = await $('.rank').map(function() { return $(this).text() })
 
-        // console.log(music_Array)
+            // 제목
+            let title = await $('.rank01 > span > a').map(function() { return $(this).text() })
 
-        music_Array.map(item=>{
-            console.log(item)
-            // var insert_sql='INSERT INTO music_chart(ranking,Artist,Album,title,platform) VALUES( & ,& ,& ,& ,& )'
-            DAO.query(`insert into music_chart(ranking,Artist,Album,title,platform) 
-            VALUES("${item.Ranking}", "${item.Artist}", "${item.Album}", "${item.Title}", 'Melon')`).then(result=>{
+            // 가수
+            let musition = await $('.rank02 > span > a').map(function() { return $(this).text() })
 
-            })
-            // .catch(e=>console.log())
+            // 앨범
+            let album = await $('.rank03 > a').map(function() { return $(this).text() })
+
+            music_list.push({ ranking: rank[0], title: title[0], musition: musition[0], album: album[0] })
         })
 
-        var selectsql = 'select * from music_chart'
-        
-        DAO.query(selectsql)
-        .then(result=>{
+        await list[0]
+
+        music_list.map(item => {
+            var new_item = item
+            new_item.platform = "melon"
+
+            DAO.query('INSERT INTO music_chart SET ?', new_item)
+                .then(result => console.log(result))
+                .catch(e => console.log(e))
         })
-        .catch(e=>console.log(e))
-       // console.log(aaa)
+
+        DAO.query(`SELECT * FROM music_chart`)
+            .then(result => { console.log(result) })
+            .catch(e => console.log(e))
+
     })
 }
-
-
-
