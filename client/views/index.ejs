@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        #btn-top{
+            float:right;
+            background:yellowgreen;
+            height : 70px;
+            width : 150px;
+            font-size: 30px;
+            color : white;
+        }
+        table{
+            margin-left:auto; margin-right: auto;
+            text-align : center;
+        }
+        table,th,td{
+            border :1px solid #bcbcbc;
+            margin-left:auto; margin-right: auto;
+            margin:auto;
+            text-align : center
+        }
+        th{
+            background: #d68a18;
+            height:70px;
+            width : 150px;
+            color : white;
+            font-size: 20px;
+        }
+        td{
+            background: #ec971894;
+            height:70px;
+            width : 200px;
+            font-weight: bolder;
+
+        }
+        .rank{
+            width : 50px;
+        }
+    
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+<body>
+        <div>
+            <button id='btn-top'>back</button>
+            <button id='btn-top' >Quajeo</button>
+            <button id='btn-top' >chart</button>
+            <button id='btn-top'>home</button>
+        </div>
+        
+    <div style="padding-top:150px;">
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class='rank'>Rank</th>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Album</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+            <%for(var i in result){%>
+            <tr>
+                <td class='rank'><%=result[i].ranking%></td>
+                <td><%=result[i].title%></td>
+                <td><%=result[i].artist%></td>
+                <td><%=result[i].album%></td>
+                <td><%=moment(result[i].registdt).format("YYYY-MM-DD")%></td>
+            </tr>
+            <%}%>
+        </table>
+        </div>
+    </div>
+</body>
+</html>
+
