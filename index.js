@@ -1,17 +1,16 @@
 import express from 'express'
 
 import {req_melon} from './src/crawler'
+import { PORT } from './config';
+import router from './src/router';
 
-import { req_melon } from './src/crawler';
+var app = require('express')();
+app.use(router)
 
+app.set('views', __dirname + '/client/views');
+app.set('view engine', 'ejs');
+app.engine('html', require('ejs').renderFile);
 
-var server = express()
-
-server.listen(3000, () => {
-
-    console.log('server asdasdfstart ...')
-
+app.listen(PORT, () => {
     console.log('server start ...')
-
-    req_melon()
 })
