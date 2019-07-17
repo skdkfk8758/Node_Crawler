@@ -1,6 +1,6 @@
 import express from 'express'
-import router from './src/router';
-import MelonController from './src/controller/melon_controller';
+import router from './src_bj/router';
+import MelonController from './src_bj/controller/melon_controller';
 
 //import { req_melon } from './src/crawler';
 
@@ -8,7 +8,7 @@ import MelonController from './src/controller/melon_controller';
 var app = require('express')();
 app.use(router)
 
-app.set('views',__dirname+'/client/views')
+app.set('views',__dirname+'/client_bj/views')
 app.set('view engine', 'ejs')
 app.engine('html',require('ejs').renderFile)
 //var server = express()
