@@ -2,9 +2,6 @@ import express from 'express'
 import router from './src_bj/router';
 import MelonController from './src_bj/controller/melon_controller';
 
-//import { req_melon } from './src/crawler';
-
-
 var app = require('express')();
 app.use(router) 
 
@@ -18,6 +15,4 @@ app.listen(3001, () => {
     console.log('server asdasdfstart ...')
 
     console.log('server start ...')
-
-    //req_melon()
 })

@@ -16,7 +16,7 @@ export const query = async (sql = "", param = {}) => {
     })
 }
 
- const DAO = {
+const DAO = {
     query,
     conn
 }
