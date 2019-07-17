@@ -1,6 +1,6 @@
 import request from 'request'
 import cheerio from 'cheerio'
-import DAO from '../DAO';
+import DAO from '../../src/DAO';
 
 export const req_melon = async () => {    
     await request.get('https://www.melon.com/chart/', async (error, response, body) => {
