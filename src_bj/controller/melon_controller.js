@@ -1,4 +1,6 @@
-import DAO from "../DAO";
+import DAO from "../../src_bj/DAO";
+
+
 
 const fetch_melon_list=async()=>{
     var result=await DAO.query(`SELECT * FROM music_chart`)
@@ -7,6 +9,8 @@ const fetch_melon_list=async()=>{
     
     return result
 }
+
+
 
 const MelonController={
     fetch_melon_list

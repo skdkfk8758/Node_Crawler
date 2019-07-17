@@ -1,5 +1,5 @@
 import express from 'express'
-import MelonController from '../controller/melon_controller';
+import MelonController from '../../src_bj/controller/melon_controller';
 var path=require('path')
 var moment=require('moment')
 const router=express.Router();
