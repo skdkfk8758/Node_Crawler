@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <style>
+
         #btn-top{
             float:right;
             background:yellowgreen;
             height : 70px;
             width : 150px;
-            font-size: 30px;
-            color : red; 
+            font-size: 20px;
+            color : white; 
         }
         table{
             margin-left:auto; margin-right: auto;
@@ -23,19 +24,20 @@
         th{
             background: #d68a18;
             height:70px;
-            width : 150px;
             color : white;
-            font-size: 20px;
+            font-size: 18px;
         }
         td{
             background: #ec971894;
-            height:70px;
-            width : 200px;
             font-weight: bolder;
 
         }
+
         .rank{
             width : 50px;
+        }
+        .thumbnail{
+            height :auto;
         }
     
     </style>
@@ -58,19 +60,33 @@
                 <thead>
                     <tr>
                         <th class='rank'>Rank</th>
+                        <th class='thumbnail'>Thumbnail</th>
                         <th>Title</th>
                         <th>Artist</th>
                         <th>Album</th>
                         <th>Date</th>
+                        <th>Watch</th>
                     </tr>
                 </thead>
             <%for(var i in result){%>
             <tr>
                 <td class='rank'><%=result[i].ranking%></td>
+                <td class='thumbnail'>
+                    <div style="width: 100px; height:100px;">
+                        <img width='100%' height='100%' src=' <%=result[i].thumbnail%>'></td>
+                    </div>
                 <td><%=result[i].title%></td>
                 <td><%=result[i].artist%></td>
                 <td><%=result[i].album%></td>
-                <td><%=moment(result[i].registdt).format("YYYY-MM-DD")%></td>
+                <td><%=moment(result[i].registdt).format("MM-DD")%></td>
+                <td>
+                        <div style="width: 100px; height:100px;">
+                            <a href='<%=result[i].utube%>'>
+                                <image width='100%' height='100%' src='/images/youtube.png'>
+                                </image>
+                            </a>
+                    </div>
+                </td>
             </tr>
             <%}%>
         </table>
@@ -79,3 +95,8 @@
 </body>
 </html>
 
+<script>
+function watch_video(title){
+    
+}
+</script>

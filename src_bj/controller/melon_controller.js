@@ -1,14 +1,20 @@
 import DAO from "../../src_bj/DAO";
+import { youtube_api } from "../library/youtubeAPI";
 
 
 
 const fetch_melon_list=async()=>{
-    var result=await DAO.query(`SELECT * FROM music_chart`)
-    .then(result => { return result })
-    .catch(e => console.log(e))
-    
-    return result
-}
+
+    return new Promise((resolve,reject)=>{
+        DAO.query(`SELECT * FROM music_chart`)
+        .then(result => { 
+               
+            resolve(result)  
+            })
+           
+        })
+    }
+
 
 
 
