@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title><%= title %></title>
+
+    <style>
+        div { margin: 0; padding: 0; }
+        .wrapper { width: 70%; margin: auto; }
+        .nav { background: red; }
+        .nav div { width: calc(25% - 2px); height: 50px; background: #eee; float: left; text-align: center; line-height: 50px; color: black; border: 1px solid #ccc; }
+        .content { width: 100%; background: white; padding-top: 70px; }
+        .content .list { margin: auto; background: #ccc; }
+        .content .list .item { width: 100%; height: 40px; margin-bottom: 5px; background: aqua; border-bottom: 2px solid black; }
+        .content .list .item .rank { width: 100px; text-align: center; }
+        .content .list .item .title { text-align: center; }
+        .content .list .item .image div { width: 70px; height: 70px; }
+        .content .list .item .watch div { width: 40px; height: 40px; }
+        .content .list .item .date { width: 100px; text-align: center; }
+        table { width: 100%; }
+    </style>
+</head>
+<body>
+    <div class= "wrapper">
+        <div class= "nav">
+            <div>HOME</div>
+            <div>MELON</div>
+            <div>KKUJEO</div>
+            <div>BACK</div>
+        </div>
+        <div class= "content">
+            <div class="list">
+            <table>
+                <tbody>
+                    <% for(var i = 0; i < melon_list.length; i++) { %>
+                        <tr class="item">
+                            <td class="rank"><%= melon_list[i].ranking%></td>
+                            <td class="image">
+                                <div>
+                                    <img src='<%= melon_list[i].image_src%>' width="100%" height="100%">
+                                </div>
+                            </td>
+                            <td class="title">
+                                <div>
+                                    <a target='_blank' href= <%= melon_list[i].video_src%>> 
+                                        <%= melon_list[i].title%>
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="musition"><%= melon_list[i].musition%></td>
+                            <td class="album"><%= melon_list[i].album%></td>
+                            <td class="date"><%= moment(melon_list[i].regist_dt).format("YYYY-MM-DD") %></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>    
+            </div>
+        </div>
+    </div>
+</body>
+</html>

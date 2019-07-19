@@ -1,10 +1,13 @@
 import DAO from "../DAO";
+import { call_youtube } from "../lib/youtube_api";
 
 // 멜론차트 출력
 const fetch_melon_chart = async () => {   
-    const list = await DAO.query(`SELECT * FROM music_chart`).catch(e => console.log(e))
-
-    return list
+    return new Promise((resolve, reject) => {
+        DAO.query(`SELECT * FROM music_chart`)
+            .then(async result => { resolve(result) })
+            .catch(e => console.log(e))
+    })
 }
 
 
